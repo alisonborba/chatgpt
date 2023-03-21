@@ -83,7 +83,7 @@ export default function Chat({person, clearPerson}) {
             {loading && <Grid container justifyContent="center"><CircularProgress /></Grid>}
             <OutlinedInput
                 sx={{color: 'white', border: '3px solid white', width: 'calc(100% - 30px)', m: '15px'}}
-                placeholder={'escreva aqui...'}
+                placeholder={`Escreva aqui qualquer coisa que queira saber sobre ${person.nickname}...`}
                 onKeyDown={(e) => keyPress(e)}
                 type="text"
                 value={text}
