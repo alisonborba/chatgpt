@@ -42,6 +42,7 @@ export default function CharacterSelect({select}) {
                 })
             }
         </Grid>
+        <Grid container justifyContent="center" sx={{color: 'white', mt: 2}}>***Está aplicação é apenas um estudo de caso, as informações são providas atravez do ChatGPT (Inteligência artificial).***</Grid>
     </Grid>
   );
 }
