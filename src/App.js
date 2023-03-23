@@ -20,7 +20,7 @@ function App() {
               setLang(lang === 'pt' ? 'en' : 'pt')
               i18n.changeLanguage(lang === 'pt' ? 'pt' : 'en')
               }}>
-            {<img width='30px' src={lang === 'pt' ? 'brasil.png': 'english.png'} />}
+            {<img width='30px' src={lang === 'pt' ? 'brasil.png': 'english.png'} alt="languages-flag"/>}
           </IconButton>
         </div>
 
