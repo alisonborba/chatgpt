@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CircularProgress, Grid, IconButton, OutlinedInput, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useTranslation } from 'react-i18next';
 
 import speak from './speechService';
 import chatgptApi from './chatgptService';
@@ -10,6 +11,9 @@ export default function Chat({person, clearPerson}) {
     const [loading, setLoading] = useState(false);
     const [text, setText] = useState('');
     const [dialog, setDialog] = useState([]);
+    const { t, i18n } = useTranslation();
+
+    const pt = i18n.language === 'pt';
 
     const sendMessage = async (_text) => {
         setDialog((dialog) => [...dialog, {user: 1, text: _text}]);
@@ -18,13 +22,13 @@ export default function Chat({person, clearPerson}) {
 
         // Initializing the speech component before use it
         // It's necessary to mobile (iOS, not sure android)
-        speak('pt-BR', '')
+        speak(pt ? 'pt-BR' : 'en-US', '')
 
-        const apiResponse = await chatgptApi(_text, person.nickname);
+        const apiResponse = await chatgptApi(_text, person.nickname, pt ? 'portugês do Brasil' : 'inglês');
 
         if (apiResponse) {
             setDialog((dialog) => [...dialog, {user: 0, text: apiResponse.choices[0].text}]);
-            speak('pt-BR', apiResponse.choices[0].text)
+            speak(pt ? 'pt-BR' : 'en-US', apiResponse.choices[0].text)
             setLoading(false);
         }
     };
@@ -55,8 +59,8 @@ export default function Chat({person, clearPerson}) {
                         sx={{p: 1}}
                         variant='h5'
                         color={'white'}
-                        onClick={() => speak('pt-BR', `Olá! Sou ${person.nickname}, pergunte-me o que quiser.`)}>
-                        {person.nickname}
+                        onClick={() => speak(pt ? 'pt-BR' : 'en-US', `${t('hello1')} ${person.nickname}, ${t('hello2')}`)}>
+                        {pt ? person.nickname : person.nickname_en}
                     </Typography>
                 </Grid>
             </Grid>
@@ -83,7 +87,7 @@ export default function Chat({person, clearPerson}) {
             {loading && <Grid container justifyContent="center"><CircularProgress /></Grid>}
             <OutlinedInput
                 sx={{color: 'white', border: '3px solid white', width: 'calc(100% - 30px)', m: '15px'}}
-                placeholder={`Escreva aqui qualquer coisa que queira saber sobre ${person.nickname}...`}
+                placeholder={`${t('chatPlaceholder')} ${pt ? person.nickname : person.nickname_en}...`}
                 onKeyDown={(e) => keyPress(e)}
                 type="text"
                 value={text}

@@ -1,43 +1,31 @@
 import * as React from 'react';
 import { useState } from "react";
-import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles';
-import { Switch, IconButton} from '@mui/material';
-import { ptBR, enUS } from '@mui/material/locale';
+import { IconButton} from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
-
+import './i18n'
 import "./App.css";
-import CharacterSelect from './CharacterSelect.js';
 import Chat from './Chat.js';
+import CharacterSelect from './CharacterSelect.js';
 
 function App() {
   const [person, setPerson] = useState();
-  const [locale, setLocale] = React.useState(ptBR);
-	const [checked, setChecked] = React.useState(false);
-	const theme = useTheme();
-	const themeWithLocale = React.useMemo(
-		() => createTheme(theme, locale),
-		[theme, locale],
-	);
-  React.useEffect(() => {
-		if (checked) {
-			setLocale(enUS)
-		} else {
-			setLocale(ptBR)
-		}
-	}, [checked])
+	const [lang, setLang] = useState('pt');
+  const { i18n } = useTranslation();
 
   return (
     <div className="App">
-      <ThemeProvider theme={themeWithLocale}>
-        <div style={{position: 'fixed', top: '0', right: '5px', zIndex: 999999}}>
-          <IconButton onClick={() => {setChecked(checked => !checked)}}>
-            {<img width='30px' src={locale === enUS ? 'english.png': 'brasil.png'} />}
+        <div style={{position: 'absolute', top: '15px', right: '15px' }}>
+          <IconButton onClick={() => {
+              setLang(lang === 'pt' ? 'en' : 'pt')
+              i18n.changeLanguage(lang === 'pt' ? 'pt' : 'en')
+              }}>
+            {<img width='30px' src={lang === 'pt' ? 'brasil.png': 'english.png'} />}
           </IconButton>
         </div>
 
         {!person && <CharacterSelect select={(c) => setPerson(c)}/> }
         {person && <Chat person={person} clearPerson={() => setPerson(null)}/> }
-		  </ThemeProvider>
     </div>
   );
 }

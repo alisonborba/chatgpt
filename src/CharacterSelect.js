@@ -4,14 +4,18 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Grid } from '@mui/material';
 import { chars } from './characters'
+import { useTranslation } from 'react-i18next';
 
 export default function CharacterSelect({select}) {
+    const { t, i18n } = useTranslation();
+
+    const pt = i18n.language === 'pt';
 
   return (
     <Grid sx={{m: 2}}>
         <Grid textAlign={'center'} sx={{mb: 2}}>
-          <Typography variant='h5' color={'white'}>Pergunte aos mestres</Typography>
-          <Typography variant='h6' color={'white'}>Escolha um e faça qualquer pergunta</Typography>
+          <Typography variant='h5' color={'white'}>{t('title')}</Typography>
+          <Typography variant='h6' color={'white'}>{t('subtitle')}</Typography>
         </Grid>
         <Grid container spacing={2}>
             {
@@ -30,10 +34,10 @@ export default function CharacterSelect({select}) {
                                     }}
                                 >
                                 <Typography component="div" sx={{pb: '5px'}}>
-                                    {c.name}
+                                    {pt ? c.name : c.name_en}
                                 </Typography>
                                 <Typography variant="body" color="text.secondary" sx={{color: 'black', m: '10px 0'}}>
-                                    {c.description}
+                                    {pt ? c.description : c.description_en}
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
@@ -42,7 +46,7 @@ export default function CharacterSelect({select}) {
                 })
             }
         </Grid>
-        <Grid container justifyContent="center" sx={{color: 'white', mt: 2}}>***Está aplicação é apenas um estudo de caso, as informações são providas atravez do ChatGPT (Inteligência artificial).***</Grid>
+        <Grid container justifyContent="center" sx={{color: 'white', mt: 2}}>{t('warningMessage')}</Grid>
     </Grid>
   );
 }
