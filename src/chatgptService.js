@@ -1,12 +1,14 @@
 import axios from 'axios';
 
-export default async function chatgptApi(text, person) {
+export default async function chatgptApi(text, person, lang) {
 
     const apiKey = process.env.REACT_APP_CHATGPT_KEY
+    const numberOfWords = 60;
+    const tokens = 20;    
 
     const data = JSON.stringify({
-        prompt: `${text}. Fale como se fosse ${person}, termine o texto questionando ou perguntando algo e resuma em aproximadamente 60 palavras.`,
-        max_tokens: 200,
+        prompt: `${text}. Fale como se fosse ${person}, termine o texto questionando ou perguntando algo, resuma em aproximadamente ${numberOfWords} palavras e em ${lang}`,
+        max_tokens: tokens,
         n: 1,
         // stop: "."
     });
