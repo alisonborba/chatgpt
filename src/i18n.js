@@ -8,7 +8,7 @@ i18next
         resources: {
             en: {
                 translation: {
-                    title: 'Ask a question to a Master',
+                    title: 'Ask the Masters',
                     subtitle: 'Choose one and make any question',
                     hello1: 'Hello! I am',
                     hello2: 'ask me anything.',
