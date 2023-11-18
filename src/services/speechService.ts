@@ -33,14 +33,14 @@ const speak = (locale: string, text: string) => {
 
   // @TODO load preference here, e.g. male / female etc.
   // @TODO but for now we just use the first occurrence
-  const utterance = new window.SpeechSynthesisUtterance();
+  let utterance = new SpeechSynthesisUtterance();
   utterance.voice = selectedVoice;
   utterance.volume = 1;
   utterance.text = text;
   utterance.lang = locale;
 
-  speechSynth.cancel(); // cancel current speak, if any is running
-  speechSynth.speak(utterance);
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utterance);
 };
 
 export default speak;
