@@ -16,10 +16,8 @@ export const ChatInput = ({ placeholder, sendMessage }: ChatInputProps) => {
       placeholder={placeholder}
       onKeyDown={(e) => {
         if (e.key === "Enter") {
+          sendMessage((e.target as HTMLInputElement).value);
           e.preventDefault(); // Prevent insert "enter key"
-          if (e.target instanceof HTMLInputElement) {
-            sendMessage(e.target.value);
-          }
           setText("");
         }
       }}
