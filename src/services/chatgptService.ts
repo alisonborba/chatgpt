@@ -7,11 +7,11 @@ export default async function chatgptApi(
 ) {
   const apiKey = import.meta.env.VITE_REACT_APP_CHATGPT_KEY;
   const engine = "text-davinci-003";
-  const numberOfWords = 60;
+  const numberOfWords = 40;
   const tokens = 300;
 
   const data = JSON.stringify({
-    prompt: `${text}. Fale como se fosse ${person}, termine o texto questionando ou perguntando algo, resuma em aproximadamente ${numberOfWords} palavras e em ${lang}`,
+    prompt: `${text}. Fale como se fosse ${person}, resuma ser um um texto curto de no maximo ${numberOfWords} palavras e o texto deve ser no idioma ${lang}`,
     max_tokens: tokens,
     n: 1,
     // stop: "."
