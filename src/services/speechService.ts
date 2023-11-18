@@ -11,7 +11,6 @@ let cachedVoice: SpeechSynthesisVoice | null;
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(() => {
     voices = speechSynth.getVoices();
-    console.log("voices", voices);
   });
 });
 
