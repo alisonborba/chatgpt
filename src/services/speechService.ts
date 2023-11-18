@@ -32,7 +32,10 @@ const speak = (locale: string, text: string) => {
   const selectedVoice = getVoices(locale);
 
   // @TODO load preference here, e.g. male / female etc.
-  // @TODO but for now we just use the first occurrence
+  // but for now we just use the first occurrence.
+
+  // @TODO iOS mobile device apparently needs, a trigger,
+  // a user allowance button to properly speak.
   let utterance = new SpeechSynthesisUtterance();
   utterance.voice = selectedVoice;
   utterance.volume = 1;
