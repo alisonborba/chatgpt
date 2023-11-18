@@ -10,21 +10,19 @@ interface ChatInputProps {
 export const ChatInput = ({ placeholder, sendMessage }: ChatInputProps) => {
   const [text, setText] = useState("");
 
-  const keyPress = (e: KeyboardEvent) => {
-    // Get enter key and submit the message
-    if (e.key === "Enter") {
-      const text = (e.target as HTMLInputElement).value;
-      e.preventDefault(); //prevent insert "enter key"
-      sendMessage(text);
-      setText("");
-    }
-  };
-
   return (
     <OutlinedInput
       className="dialog-input"
       placeholder={placeholder}
-      onKeyDown={(e) => keyPress(e)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          e.preventDefault(); // Prevent insert "enter key"
+          if (e.target instanceof HTMLInputElement) {
+            sendMessage(e.target.value);
+          }
+          setText("");
+        }
+      }}
       type="text"
       value={text}
       multiline
