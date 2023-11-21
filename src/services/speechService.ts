@@ -1,4 +1,4 @@
-let speechSynth = window.speechSynthesis;
+const speechSynth = window.speechSynthesis;
 let voices: SpeechSynthesisVoice[];
 let cachedVoice: SpeechSynthesisVoice | null;
 
@@ -36,7 +36,7 @@ const speak = (locale: string, text: string) => {
 
   // @TODO iOS mobile device apparently needs, a trigger,
   // a user allowance button to properly speak.
-  let utterance = new SpeechSynthesisUtterance();
+  const utterance = new SpeechSynthesisUtterance();
   utterance.voice = selectedVoice;
   utterance.volume = 1;
   utterance.text = text;
