@@ -17,12 +17,13 @@ function App() {
       <div className="top-i18n-btn">
         <IconButton
           title={`Translate to ${lang}`}
+          data-testid="lang-flag"
           onClick={() => {
             setLang(lang === Lang.PT ? Lang.EN : Lang.PT);
             i18n.changeLanguage(lang);
           }}
         >
-          {<img width="30px" src={`${lang}.png`} alt="languages-flag" />}
+          {<img width="30px" src={`${lang}.png`} alt={`${lang}-flag`} />}
         </IconButton>
       </div>
       {!person && <CharacterSelect select={(p: Person) => setPerson(p)} />}
