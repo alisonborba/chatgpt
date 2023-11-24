@@ -24,7 +24,7 @@ export default function CharacterSelect({ select }: CharacterSelectProps) {
           {t("subtitle")}
         </Typography>
       </Grid>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} data-testid="character-grid">
         {chars.map((c, i) => {
           return (
             <Grid key={i} item xs={12} sm={4} md={3} lg={3}>
