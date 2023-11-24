@@ -10,6 +10,12 @@ Link: https://fastidious-cajeta-341ec2.netlify.app/
 yarn
 ```
 
+### Test
+
+Using: Jest (w types) and Vitest
+Run Command:
+`yarn test`
+
 ## Run
 
 ```
