@@ -2,7 +2,8 @@
 
 ## Demo
 
-Link: https://fastidious-cajeta-341ec2.netlify.app/
+Link: https://ask-master.netlify.app/
+
 
 ## Installation
 
