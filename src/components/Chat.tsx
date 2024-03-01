@@ -31,7 +31,7 @@ export default function Chat({ person, clearPerson }: ChatProps) {
     const apiResponse = await chatgptApi(_text, person.nickname, lang.label);
 
     if (apiResponse) {
-      const respText = apiResponse.choices[0]?.text;
+      const respText = apiResponse.choices[0]?.message?.content;
       setDialog((dialog) => [...dialog, { user: 0, text: respText }]);
       speak(lang.locale, respText);
     } else {

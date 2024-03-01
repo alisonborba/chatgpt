@@ -6,15 +6,20 @@ export default async function chatgptApi(
   lang: string
 ) {
   const apiKey = import.meta.env.VITE_REACT_APP_CHATGPT_KEY;
-  const engine = "text-davinci-003";
-  const numberOfWords = 40;
-  const tokens = 300;
+  const numberOfWords = 50;
 
   const data = JSON.stringify({
-    prompt: `${text}. Fale como se fosse ${person}, resuma ser um um texto curto de no maximo ${numberOfWords} palavras e o texto deve ser no idioma ${lang}`,
-    max_tokens: tokens,
-    n: 1,
-    // stop: "."
+    model: 'gpt-3.5-turbo',
+    messages: [
+      {
+        role: 'system',
+        content: `You are ${person}, make a small text with up to ${numberOfWords} words. The text should be in ${lang}`
+      },
+      {
+        role: "user",
+        content: text
+      }
+    ]
   });
 
   const headers = {
@@ -24,11 +29,12 @@ export default async function chatgptApi(
 
   try {
     const apiResponse = await axios({
-      url: `https://api.openai.com/v1/engines/${engine}/completions`,
+      url: `https://api.openai.com/v1/chat/completions`,
       method: "POST",
       headers,
       data,
     });
+    console.log('apiResponse', apiResponse);
     return apiResponse?.data;
   } catch (error) {
     console.log("error", error);
